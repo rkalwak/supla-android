@@ -27,8 +27,7 @@ import org.supla.android.data.model.spinner.SubjectItem
 import org.supla.android.data.model.spinner.SubjectItemConversionScope
 import org.supla.android.data.source.AndroidAutoItemRepository
 import org.supla.android.data.source.ChannelGroupRepository
-import org.supla.android.data.source.RoomChannelRepository
-import org.supla.android.data.source.RoomSceneRepository
+import org.supla.android.data.source.SceneRepository
 import org.supla.android.data.source.local.entity.AndroidAutoItemEntity
 import org.supla.android.extensions.subscribeBy
 import org.supla.android.lib.actions.ActionId
@@ -54,7 +53,7 @@ class AddAndroidAutoItemViewModel @Inject constructor(
   override val getChannelIconUseCase: GetChannelIconUseCase,
   override val getSceneIconUseCase: GetSceneIconUseCase,
   override val getCaptionUseCase: GetCaptionUseCase,
-  private val sceneRepository: RoomSceneRepository,
+  private val sceneRepository: SceneRepository,
   schedulers: SuplaSchedulers
 ) : BaseViewModel<AddAndroidAutoItemViewModelState, AddAndroidAutoItemViewEvent>(AddAndroidAutoItemViewModelState(), schedulers),
   AddAndroidAutoItemScope,

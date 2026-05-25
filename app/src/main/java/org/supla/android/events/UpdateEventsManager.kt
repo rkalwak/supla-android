@@ -23,7 +23,7 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.Subject
 import org.supla.android.data.source.ChannelRepository
 import org.supla.android.data.source.ProfileRepository
-import org.supla.android.data.source.RoomSceneRepository
+import org.supla.android.data.source.SceneRepository
 import org.supla.android.data.source.local.entity.SceneEntity
 import org.supla.android.data.source.local.entity.custom.ChannelWithChildren
 import org.supla.android.db.ChannelGroup
@@ -37,7 +37,7 @@ import javax.inject.Singleton
 class UpdateEventsManager @Inject constructor(
   private val profileRepository: ProfileRepository,
   private val channelRepository: ChannelRepository,
-  private val sceneRepository: RoomSceneRepository,
+  private val sceneRepository: SceneRepository,
   private val readChannelWithChildrenUseCase: ReadChannelWithChildrenUseCase,
   private val channelToRootRelationHolderUseCase: ChannelToRootRelationHolderUseCase
 ) {
