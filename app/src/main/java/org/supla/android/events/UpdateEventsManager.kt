@@ -22,10 +22,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.Subject
 import org.supla.android.data.source.ChannelRepository
+import org.supla.android.data.source.ProfileRepository
 import org.supla.android.data.source.RoomSceneRepository
 import org.supla.android.data.source.local.entity.SceneEntity
 import org.supla.android.data.source.local.entity.custom.ChannelWithChildren
-import org.supla.android.db.Channel
 import org.supla.android.db.ChannelGroup
 import org.supla.android.usecases.channel.ChannelToRootRelationHolderUseCase
 import org.supla.android.usecases.channel.ReadChannelWithChildrenUseCase
@@ -35,6 +35,7 @@ import javax.inject.Singleton
 
 @Singleton
 class UpdateEventsManager @Inject constructor(
+  private val profileRepository: ProfileRepository,
   private val channelRepository: ChannelRepository,
   private val sceneRepository: RoomSceneRepository,
   private val readChannelWithChildrenUseCase: ReadChannelWithChildrenUseCase,
@@ -96,8 +97,10 @@ class UpdateEventsManager @Inject constructor(
   fun observeChannelEvents(channelId: Int): Observable<State> = getSubjectForChannel(channelId).hide()
 
   fun observeGroup(groupId: Int): Observable<ChannelGroup> {
-    return getSubjectForChannelGroup(groupId).hide()
-      .map { channelRepository.getChannelGroup(groupId) }
+    return profileRepository.findActiveProfile().flatMapObservable { profile ->
+      getSubjectForChannelGroup(groupId).hide()
+        .map { channelRepository.getChannelGroup(groupId, profile.id!!) }
+    }
   }
 
   fun observeGroupEvents(groupId: Int): Observable<State> = getSubjectForChannelGroup(groupId).hide()
