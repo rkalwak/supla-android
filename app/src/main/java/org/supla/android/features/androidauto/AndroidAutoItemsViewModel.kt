@@ -18,7 +18,7 @@ package org.supla.android.features.androidauto
  */
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import org.supla.android.Preferences
+import org.supla.android.core.storage.ApplicationPreferences
 import org.supla.android.core.ui.BaseViewModel
 import org.supla.android.core.ui.ViewEvent
 import org.supla.android.core.ui.ViewState
@@ -35,7 +35,7 @@ class AndroidAutoItemsViewModel @Inject constructor(
   private val androidAutoItemRepository: AndroidAutoItemRepository,
   private val getChannelIconUseCase: GetChannelIconUseCase,
   private val getSceneIconUseCase: GetSceneIconUseCase,
-  private val preferences: Preferences,
+  private val preferences: ApplicationPreferences,
   schedulers: SuplaSchedulers
 ) : BaseViewModel<AndroidAutoItemsViewModelState, AndroidAutoItemsViewEvent>(AndroidAutoItemsViewModelState(), schedulers),
   AndroidAutoItemsViewScope {
